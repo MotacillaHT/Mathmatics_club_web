@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>文化祭特別ページ - クイズ挑戦</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
+        .quiz-item { margin-bottom: 15px; padding: 10px; border-bottom: 1px solid #eee; }
+        .status { margin-left: 10px; font-weight: bold; }
+        .correct { color: green; }
+        .incorrect { color: red; }
+        #result-area { 
+            margin-top: 20px; padding: 20px; border: 2px dashed #f00; 
+            display: none; background-color: #fff4f4; text-align: center;
+        }
+        .pass-text { font-size: 1.5em; color: #d00; font-weight: bold; }
+        button { padding: 10px 20px; cursor: pointer; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>全問正解で合言葉をゲット！</h1>
+    <p>10個の答えを入力して「判定」ボタンを押してください。</p>
+
+    <div id="quiz-container">
+        <!-- クイズを10個生成 -->
+        <div id="questions"></div>
+        <button onclick="checkAnswers()">正解を確認する</button>
+    </div>
+
+    <!-- 全問正解時に表示されるエリア -->
+    <div id="result-area">
+        <h2>🎉 全問正解おめでとう！</h2>
+        <p>合言葉は...</p>
+        <p class="pass-text">math2026</p>
+        <p>この合言葉をメモして、次のページへ進んでください。</p>
+        <button onclick="goToNext()">合言葉を入力して進む</button>
+    </div>
+
+    <script>
+        // 正解のリスト（ここを実際の答えに変更してください）
+        const correctAnswers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+
+        // 画面読み込み時に10個の入力欄を作成
+        const questionsDiv = document.getElementById('questions');
+        for (let i = 1; i <= 10; i++) {
+            questionsDiv.innerHTML += `
+                <div class="quiz-item">
+                    問題 ${i}: <input type="text" class="answer-input" placeholder="答えを入力">
+                    <span class="status" id="status-${i-1}"></span>
+                </div>
+            `;
+        }
+
+        function checkAnswers() {
+            const inputs = document.querySelectorAll('.answer-input');
+            let correctCount = 0;
+
+            inputs.forEach((input, index) => {
+                const statusSpan = document.getElementById(`status-${index}`);
+                if (input.value === correctAnswers[index]) {
+                    statusSpan.textContent = "✅ 正解！";
+                    statusSpan.className = "status correct";
+                    correctCount++;
+                } else {
+                    statusSpan.textContent = "❌ 不正解";
+                    statusSpan.className = "status incorrect";
+                }
+            });
+
+            // 全問正解（10個）の場合
+            if (correctCount === 10) {
+                document.getElementById('result-area').style.display = 'block';
+                window.scrollTo(0, document.body.scrollHeight); // 画面下部へスクロール
+            } else {
+                document.getElementById('result-area').style.display = 'none';
+                alert("まだ間違っている問題があります。");
+            }
+        }
+
+        // 前のコードの機能を統合
+        function goToNext() {
+            const password = prompt("表示された合言葉を入力してください：");
+            if (password === "math2026") {
+                window.location.href = 'https://sites.google.com/gs.seito-fku.ed.jp/jhs';
+            } else {
+                alert("合言葉が違います。");
+            }
+        }
+    </script>
+</body>
+</html>
