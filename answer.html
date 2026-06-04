@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>文化祭特別ページ - クイズ挑戦</title>
+    <title>文化祭特別ページ</title>
     <style>
         body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
         .quiz-item { margin-bottom: 15px; padding: 10px; border-bottom: 1px solid #eee; }
@@ -20,7 +20,7 @@
 <body>
 
     <h1>全問正解で合言葉をゲット！</h1>
-    <p>10個の答えを入力して「判定」ボタンを押してください。</p>
+    <p>10個の答えを入力して「判定」ボタンを押してください。(半角英数字で答えよ)</p>
 
     <div id="quiz-container">
         <!-- クイズを10個生成 -->
@@ -39,7 +39,7 @@
 
     <script>
         // 正解のリスト（ここを実際の答えに変更してください）
-        const correctAnswers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+        const correctAnswers = ["4", "24", "30", "1", "6", "89", "26π", "2", "B607", "1008"];
 
         // 画面読み込み時に10個の入力欄を作成
         const questionsDiv = document.getElementById('questions');
